@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.intflag.tendir.entity.User" table="sys_user" >
+        <id name="userId" type="java.lang.String">
+            <column name="user_id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <property name="username" type="java.lang.String">
+            <column name="username" length="32">
+                <comment>账户</comment>
+            </column>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="32">
+                <comment>口令</comment>
+            </column>
+        </property>
+        <property name="nickname" type="java.lang.String">
+            <column name="nickname" length="64">
+                <comment>昵称</comment>
+            </column>
+        </property>
+        <property name="gender" type="java.lang.String">
+            <column name="gender" length="8">
+                <comment>性别</comment>
+            </column>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="64">
+                <comment>邮箱</comment>
+            </column>
+        </property>
+        <property name="telephone" type="java.lang.String">
+            <column name="telephone" length="32">
+                <comment>电话</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="flag" length="8">
+                <comment>标记</comment>
+            </column>
+        </property>
+        <property name="cdate" type="java.sql.Timestamp">
+            <column name="cdate" length="19">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="mdate" type="java.sql.Timestamp">
+            <column name="mdate" length="19">
+                <comment>修改时间</comment>
+            </column>
+        </property>
+        <set name="roles" table="sys_role_user" >
+            <key>
+                <column name="user_id" length="32">
+                    <comment>用户ID</comment>
+                </column>
+            </key>
+            <many-to-many entity-name="com.intflag.tendir.entity.Role">
+                <column name="role_id" length="32">
+                    <comment>角色ID</comment>
+                </column>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

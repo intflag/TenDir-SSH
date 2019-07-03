@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.intflag.tendir.entity.Log" table="sys_log" >
+        <id name="logId" type="java.lang.String">
+            <column name="log_id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <property name="username" type="java.lang.String">
+            <column name="username" length="32">
+                <comment>操作用户</comment>
+            </column>
+        </property>
+        <property name="method" type="java.lang.String">
+            <column name="method" length="32">
+                <comment>操作方法</comment>
+            </column>
+        </property>
+        <property name="ip" type="java.lang.String">
+            <column name="ip" length="32">
+                <comment>操作IP</comment>
+            </column>
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="64">
+                <comment>操作人地理位置</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="flag" length="32">
+                <comment>操作结果</comment>
+            </column>
+        </property>
+        <property name="sort" type="java.lang.Integer">
+            <column name="sort">
+                <comment>排序</comment>
+            </column>
+        </property>
+        <property name="cdate" type="java.sql.Timestamp">
+            <column name="cdate" length="19">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" length="128">
+                <comment>操作描述</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

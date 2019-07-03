@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.intflag.tendir.entity.Region" table="t_region">
+        <id name="regionId" type="java.lang.String">
+            <column name="Region_ID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="region" class="com.intflag.tendir.entity.Region" fetch="select">
+            <column name="RegionPID" length="32">
+                <comment>父及关系</comment>
+            </column>
+        </many-to-one>
+        <property name="regionName" type="java.lang.String">
+            <column name="RegionName" length="128">
+                <comment>地区名称</comment>
+            </column>
+        </property>
+        <property name="regionFullName" type="java.lang.String">
+            <column name="RegionFullName" length="128" />
+        </property>
+        <property name="regionLevel" type="java.lang.Integer">
+            <column name="RegionLevel">
+                <comment>子属关系</comment>
+            </column>
+        </property>
+        <property name="regionFlag" type="java.lang.String">
+            <column name="RegionFlag" length="1">
+                <comment>标记0禁用1正常</comment>
+            </column>
+        </property>
+        <property name="locationLat" type="java.math.BigDecimal">
+            <column name="LocationLat" precision="11" scale="6" />
+        </property>
+        <property name="locationLng" type="java.math.BigDecimal">
+            <column name="LocationLng" precision="11" scale="6" />
+        </property>
+        <set name="children" inverse="true" >
+            <key>
+                <column name="RegionPID" length="32">
+                    <comment>父及关系</comment>
+                </column>
+            </key>
+            <one-to-many class="com.intflag.tendir.entity.Region" />
+        </set>
+    </class>
+</hibernate-mapping>

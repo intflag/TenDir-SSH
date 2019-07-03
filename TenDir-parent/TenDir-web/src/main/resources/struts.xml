@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<package name="TenDir_struts2" namespace="/" extends="struts-default">
+		<!-- 全局结果处理 -->
+		<global-results>
+			<result name="unauthorized">/unauthorized.jsp</result>
+		</global-results>
+		<!-- 全局异常处理 -->
+		<global-exception-mappings>
+			<exception-mapping result="unauthorized" exception="org.apache.shiro.authz.UnauthorizedException"></exception-mapping>
+		</global-exception-mappings>
+		<!-- 需要进行权限控制的页面访问 --> 
+		<action name="page_*_*_*">
+			<result type="dispatcher">/WEB-INF/pages/{1}/{2}/{3}.jsp</result>
+		</action>
+		<!-- 用户管理 -->
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="login">/login.jsp</result>
+			<result name="home" type="redirect">/index.jsp</result>
+			<result name="edit">/WEB-INF/pages/system/user/form.jsp</result>
+		</action>
+		<!-- 资源菜单管理 -->
+		<action name="resourceAction_*" class="resourceAction" method="{1}">
+			<result name="edit">/WEB-INF/pages/system/resource/form.jsp</result>
+		</action>
+		<!-- 角色管理 -->
+		<action name="roleAction_*" class="roleAction" method="{1}">
+			<result name="edit">/WEB-INF/pages/system/role/form.jsp</result>
+		</action>
+		<!-- 日志管理 -->
+		<action name="logAction_*" class="logAction" method="{1}">
+		</action>
+		<!-- 地区字典管理 -->
+		<action name="regionAction_*" class="regionAction" method="{1}">
+			<result name="edit">/WEB-INF/pages/wordbook/region/form.jsp</result>
+		</action>
+		<!-- 邮件日志管理 -->
+		<action name="mailLogAction_*" class="mailLogAction" method="{1}">
+		</action>
+		<!-- 短信发送管理 -->
+		<action name="qcloudSmsAction_*" class="qcloudSmsAction" method="{1}">
+		</action>
+		<!-- 代码生成器管理 -->
+		<action name="codeGeneratorAction_*" class="codeGeneratorAction" method="{1}">
+		</action>
+		<!-- 测试API -->
+		<action name="testAction_*" class="testAction" method="{1}">
+			<result name="edit">/WEB-INF/pages/app/test/form.jsp</result>
+		</action>
+	</package>
+</struts>

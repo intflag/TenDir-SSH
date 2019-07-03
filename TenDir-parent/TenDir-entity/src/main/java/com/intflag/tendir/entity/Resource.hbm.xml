@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.intflag.tendir.entity.Resource" table="sys_resource" >
+        <id name="resourceId" type="java.lang.String">
+            <column name="resource_id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <many-to-one lazy="false" name="parentResource" class="com.intflag.tendir.entity.Resource" fetch="select">
+            <column name="respid" length="32">
+                <comment>资源父ID</comment>
+            </column>
+        </many-to-one>
+        <property name="resname" type="java.lang.String">
+            <column name="resname" length="32">
+                <comment>资源名称</comment>
+            </column>
+        </property>
+        <property name="resurl" type="java.lang.String">
+            <column name="resurl" length="128">
+                <comment>资源地址</comment>
+            </column>
+        </property>
+        <property name="rescode" type="java.lang.String">
+            <column name="rescode" length="64">
+                <comment>资源关键字</comment>
+            </column>
+        </property>
+        <property name="type" type="java.lang.String">
+            <column name="type" length="8">
+                <comment>资源类型（0目录 1菜单 2按钮）</comment>
+            </column>
+        </property>
+        <property name="icon" type="java.lang.String">
+            <column name="icon" length="32">
+                <comment>资源图标</comment>
+            </column>
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" length="128">
+                <comment>资源描述</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="flag" length="8">
+                <comment>标记</comment>
+            </column>
+        </property>
+        <property name="sort" type="java.lang.Integer">
+            <column name="sort">
+                <comment>排序</comment>
+            </column>
+        </property>
+        <property name="cdate" type="java.sql.Timestamp">
+            <column name="cdate" length="19" >
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="mdate" type="java.sql.Timestamp">
+            <column name="mdate" length="19" >
+                <comment>修改时间</comment>
+            </column>
+        </property>
+        <set name="roles" lazy="false" inverse="true" table="sys_role_res" >
+            <key>
+                <column name="resource_id" length="32">
+                    <comment>资源ID</comment>
+                </column>
+            </key>
+            <many-to-many entity-name="com.intflag.tendir.entity.Role">
+                <column name="role_id" length="32">
+                    <comment>角色ID</comment>
+                </column>
+            </many-to-many>
+        </set>
+        <set name="children" lazy="false" inverse="true" order-by="sort asc">
+            <key>
+                <column name="respid" length="32">
+                    <comment>资源父ID</comment>
+                </column>
+            </key>
+            <one-to-many class="com.intflag.tendir.entity.Resource" />
+        </set>
+    </class>
+</hibernate-mapping>

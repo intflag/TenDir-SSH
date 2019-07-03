@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.intflag.tendir.entity.MailLog" table="t_maillog">
+        <id name="mailLogId" type="java.lang.String">
+            <column name="mailLog_id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <property name="smtpServer" type="java.lang.String">
+            <column name="smtpServer" length="32">
+                <comment>SMTP服务器</comment>
+            </column>
+        </property>
+        <property name="username" type="java.lang.String">
+            <column name="username" length="64">
+                <comment>发件人用户名</comment>
+            </column>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="64">
+                <comment>发件人密码</comment>
+            </column>
+        </property>
+        <property name="sendTitle" type="java.lang.String">
+            <column name="sendTitle" length="64">
+                <comment>发送标题</comment>
+            </column>
+        </property>
+        <property name="sendAddress" type="java.lang.String">
+            <column name="sendAddress" length="64">
+                <comment>收件地址</comment>
+            </column>
+        </property>
+        <property name="sendContent" type="java.lang.String">
+            <column name="sendContent" length="65535">
+                <comment>发送内容</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="flag" length="8">
+                <comment>标记</comment>
+            </column>
+        </property>
+        <property name="sort" type="java.lang.Integer">
+            <column name="sort">
+                <comment>排序</comment>
+            </column>
+        </property>
+        <property name="cdate" type="java.sql.Timestamp">
+            <column name="cdate" length="19" not-null="true">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" length="128">
+                <comment>描述</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
